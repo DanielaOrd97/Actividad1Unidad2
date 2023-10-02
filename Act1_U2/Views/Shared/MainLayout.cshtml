@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "MainLayout";
+}
+
+<html>
+<head>
+    <title>ZooPlanet</title>
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1><a href="~/Home/Index"><b>Zoo</b>Planet</a></h1>
+        <nav>
+            <ul>
+                <li><a href="~/Home/Index">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+   <main>
+       @RenderBody()
+   </main>
+    <footer>Programación Web</footer>
+</body>
+</html>
+
