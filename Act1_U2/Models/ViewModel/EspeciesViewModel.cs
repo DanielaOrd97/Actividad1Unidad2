@@ -1,0 +1,17 @@
+﻿namespace Act1_U2.Models.ViewModel
+{
+    public class EspeciesViewModel
+    {
+
+        public int IdClase { get; set; }
+        public string NombreClase { get; set; } = null!;
+        //public string NombreEspecie { get; set; } = null!;
+        public IEnumerable<EspecieModel> Especies { get; set; } = null!;
+    }
+
+
+    public class EspecieModel
+    {
+        public string Nombre { get; set; } = null!;
+    }
+}
