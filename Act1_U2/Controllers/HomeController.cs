@@ -69,25 +69,13 @@ namespace Act1_U2.Controllers
                     NombreClase = datos.IdClaseNavigation.Nombre,
                     Peso = datos.Peso,
                     Tamaño = datos.Tamaño,
-                    Habitat = datos.Habitat,
-                    Descripcion = datos.Observaciones
+                    Habitat = datos.Habitat ?? "No disponible",
+                    Descripcion = datos.Observaciones ?? "No disponible"
 
                 };
 
                 return View(vm);
             }
-            
-
-            //var d = context.Especies.Include(x => x.IdClaseNavigation).Select(x => new EspecieIndividualViewModel
-            //{
-            //    Nombre = x.Especie,
-            //    NombreClase = x.IdClaseNavigation.Nombre,
-            //    Peso = x.Peso,
-            //    Tamaño = x.Tamaño,
-            //    Habitat = x.Habitat,
-            //    Descripcion = x.Observaciones
-            //}).Where(x => x.Nombre == Id);
-
             
         }
     }
