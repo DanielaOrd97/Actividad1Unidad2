@@ -2,7 +2,7 @@
 {
     public class ClasesViewModel
     {
-        public int Id { get; set; }
+        public int IdClase { get; set; }
         public string NombreClase { get; set; } = null!;
         public IEnumerable<EspecieModel> Especies { get; set; } = null!;
     }

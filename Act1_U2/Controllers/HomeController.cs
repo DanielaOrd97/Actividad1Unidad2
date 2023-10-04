@@ -26,16 +26,9 @@ namespace Act1_U2.Controllers
         {
 
             AnimalesContext context = new();
-            // EspeciesViewModel vm = new();
 
+            ClasesViewModel vm = new();
 
-            var d = context.Especies.Include(x => x.IdClaseNavigation).OrderBy(x => x.Especie).Where(x => x.IdClaseNavigation.Nombre == Id).Select(x => new EspeciesViewModel
-            {
-                IdClase = x.IdClaseNavigation.Id,
-                NombreClase = x.IdClaseNavigation.Nombre,
-                NombreEspecie = x.Especie,
-                Especies1 = x.
-            });
 
             //vm.Especies = d.Select(x => new EspecieModel
             //{
@@ -44,11 +37,30 @@ namespace Act1_U2.Controllers
 
 
             ////////////////////////////
+            //var datos = context.Clase.Include(x => x.Especies).ThenInclude(x => x.IdClaseNavigation).Select(x => new ClasesViewModel
+            //{
+            //    IdClase = x.Id,
+            //    NombreClase = x.Nombre,
+            //    Especies = x.Especies.Select(x => new EspecieModel
+            //    {
+            //        IdEspecie = x.Id,
+            //        Nombre = x.Especie
+            //    })
+            //}).Where(x => x.NombreClase == Id).FirstOrDefault();
+
+            var datos = context.Clase.Include(x => x.Especies).ThenInclude(x => x.IdClaseNavigation).Select(x => new ClasesViewModel
+            {
+                IdClase = x.Id,
+                NombreClase = x.Nombre ?? "No contiene un nombre",
+                Especies = x.Especies.Select(x => new EspecieModel
+                {
+                    IdEspecie = x.Id,
+                    Nombre = x.Especie
+                })
+            }).FirstOrDefault(x => x.NombreClase == Id);
 
 
-          
-
-            return View(d);
+            return View(datos);
         }
 
         public IActionResult EspecieIndivudual(string Id)
