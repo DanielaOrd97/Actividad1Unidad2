@@ -11,11 +11,11 @@
 
     <div class="listaEspecies2">
        @foreach (var i in Model.Especies)
-        {
-            <a href="especie.html">
+       {
+            <a href="~/Home/Especie/@(i.Nombre.Replace(" ","-"))">
                 <img src="~/especies/@(i.IdEspecie).jpg" title="@i.Nombre" />
             </a>
-        }   
+       }   
        
     </div>
 

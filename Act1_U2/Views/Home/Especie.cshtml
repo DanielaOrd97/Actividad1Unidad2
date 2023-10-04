@@ -6,7 +6,7 @@
 <main>
 
     <div class="especieficha1">
-        <img src="especies/10.jpg" />
+        <img src="~/especies/@(Model.Id).jpg" />
         <div>
             <h1>@Model.Nombre</h1>
             <p><label>Clase:</label><a href="~/Home/Especies">@Model.NombreClase</a></p>
@@ -17,7 +17,7 @@
             <p>@Model.Descripcion</p>
         </div>
 
-        <a href="~/Home/Especies">Regresar</a>
+        <a href="~/Home/Especies/@(Model.NombreClase)">Regresar</a>
     </div>
 </main>
 

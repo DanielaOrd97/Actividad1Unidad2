@@ -2,6 +2,7 @@
 {
     public class EspecieIndividualViewModel
     {
+        public int Id { get; set; }
         public string Nombre { get; set; } = null!;
         public string NombreClase { get; set; } = null!;
         public double? Peso { get; set; }

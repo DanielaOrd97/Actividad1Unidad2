@@ -24,50 +24,74 @@ namespace Act1_U2.Controllers
 
         public IActionResult Especies(string Id)
         {
-
             AnimalesContext context = new();
 
-            ClasesViewModel vm = new();
 
-
-            //vm.Especies = d.Select(x => new EspecieModel
-            //{
-            //    Nombre = x.Especie
-            //});
-
-
-            ////////////////////////////
-            //var datos = context.Clase.Include(x => x.Especies).ThenInclude(x => x.IdClaseNavigation).Select(x => new ClasesViewModel
+            //var datos = context.Clase.Include(x => x.Especies).Select(x => new ClasesViewModel
             //{
             //    IdClase = x.Id,
-            //    NombreClase = x.Nombre,
+            //    NombreClase = x.Nombre ?? "No contiene un nombre",
             //    Especies = x.Especies.Select(x => new EspecieModel
             //    {
             //        IdEspecie = x.Id,
             //        Nombre = x.Especie
             //    })
-            //}).Where(x => x.NombreClase == Id).FirstOrDefault();
+            //}).FirstOrDefault(x => x.NombreClase == Id);
 
-            var datos = context.Clase.Include(x => x.Especies).ThenInclude(x => x.IdClaseNavigation).Select(x => new ClasesViewModel
+            //////////////////////
+            ///
+            var datos = context.Clase.Include(x => x.Especies).FirstOrDefault(x => x.Nombre == Id);
+
+            if (datos == null)
             {
-                IdClase = x.Id,
-                NombreClase = x.Nombre ?? "No contiene un nombre",
-                Especies = x.Especies.Select(x => new EspecieModel
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ClasesViewModel vm = new()
                 {
-                    IdEspecie = x.Id,
-                    Nombre = x.Especie
-                })
-            }).FirstOrDefault(x => x.NombreClase == Id);
+                    IdClase = datos.Id,
+                    NombreClase = datos.Nombre ?? "No disponible",
+                    Especies = datos.Especies.Select(x => new EspecieModel
+                    {
+                        IdEspecie = x.Id,
+                        Nombre = x.Especie
+                    })
+                };
+                return View(vm);
+            }
 
-
-            return View(datos);
         }
 
-        public IActionResult EspecieIndivudual(string Id)
+        public IActionResult Especie(string Id)
         {
+            Id = Id.Replace("-", " ");
 
-            //AnimalesContext context = new();
-            //EspecieIndividualViewModel vm = new();
+            AnimalesContext context = new();
+
+            var datos = context.Especies.Include(x => x.IdClaseNavigation).Where(x => x.Especie == Id).FirstOrDefault();
+
+            if (datos == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                EspecieIndividualViewModel vm = new()
+                {
+                    Id = datos.Id,
+                    Nombre = datos.Especie,
+                    NombreClase = datos.IdClaseNavigation.Nombre,
+                    Peso = datos.Peso,
+                    Tamaño = datos.Tamaño,
+                    Habitat = datos.Habitat,
+                    Descripcion = datos.Observaciones
+
+                };
+
+                return View(vm);
+            }
+            
 
             //var d = context.Especies.Include(x => x.IdClaseNavigation).Select(x => new EspecieIndividualViewModel
             //{
@@ -79,7 +103,7 @@ namespace Act1_U2.Controllers
             //    Descripcion = x.Observaciones
             //}).Where(x => x.Nombre == Id);
 
-            return View();
+            
         }
     }
 }
