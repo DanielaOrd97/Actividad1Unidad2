@@ -25,21 +25,6 @@ namespace Act1_U2.Controllers
         public IActionResult Especies(string Id)
         {
             AnimalesContext context = new();
-
-
-            //var datos = context.Clase.Include(x => x.Especies).Select(x => new ClasesViewModel
-            //{
-            //    IdClase = x.Id,
-            //    NombreClase = x.Nombre ?? "No contiene un nombre",
-            //    Especies = x.Especies.Select(x => new EspecieModel
-            //    {
-            //        IdEspecie = x.Id,
-            //        Nombre = x.Especie
-            //    })
-            //}).FirstOrDefault(x => x.NombreClase == Id);
-
-            //////////////////////
-            ///
             var datos = context.Clase.Include(x => x.Especies).FirstOrDefault(x => x.Nombre == Id);
 
             if (datos == null)
