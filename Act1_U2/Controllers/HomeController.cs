@@ -15,7 +15,8 @@ namespace Act1_U2.Controllers
             var d = context.Clase.OrderBy(x => x.Nombre).Select(x => new IndexViewModel
             {
                 Id = x.Id,
-                NombreClase = x.Nombre ?? ""
+                NombreClase = x.Nombre ?? "No disponible",
+                Descripcion = x.Descripcion ?? "No disponible"
             });
 
             return View(d);
